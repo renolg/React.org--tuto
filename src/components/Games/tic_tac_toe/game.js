@@ -42,7 +42,7 @@ export class Board extends React.Component {
   }
 }
 
-export class Game extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
