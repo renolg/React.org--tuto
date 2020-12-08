@@ -1,60 +1,73 @@
-// import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-// import Paper from "@material-ui/core/Paper";
-// import TextField from "@material-ui/core/TextField";
-// import Typography from "@material-ui/core/Typography";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import { Grid } from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Paper } from "@material-ui/core/";
+import TextField from "@material-ui/core/TextField";
+import { red } from "@material-ui/core/colors";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {},
-//   title: {},
-//   TextField: {
-//     margin: theme.spacing(1),
-//     width: "100ch",
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  chatZone: {
+    width: "100%",
+    borderStyle: "solid",
+    borderColor: "red",
+  },
+  paper: {
+    padding: 30,
+  },
+}));
 
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     })
-//   );
-// }
+function generate(element) {
+  return [0, 1, 2].map((value) =>
+    React.cloneElement(element, {
+      key: value,
+    })
+  );
+}
 
-// export function Chat(props) {
-//   const classes = useStyles(props);
-//   const [dense, setDense] = React.useState(false);
-//   const [secondary, setSecondary] = React.useState(false);
-//   return (
-//     <div className={classes.root}>
-//       <Grid container direction="column">
-//         <Grid item xs={12}>
-//           <Typography variant="h6" className={classes.title}>
-//             Chat
-//           </Typography>
-//         </Grid>
-//         <Grid item xs={12}>
-//           <List dense={dense}>
-//             {generate(
-//               <ListItem>
-//                 <ListItemText
-//                   primary="Single-line item"
-//                   secondary={secondary ? "Secondary text" : null}
-//                 />
-//               </ListItem>
-//             )}
-//           </List>
-//         </Grid>
-//         <Grid item xs={12}>
-//           <form className={classes.TextField} noValidate autoComplete="off">
-//             <TextField id="standard-basic" label="Type here" />
-//           </form>
-//         </Grid>
-//       </Grid>
-//     </div>
-//   );
-// }
+function Chat() {
+  const classes = useStyles();
+  const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={2}>
+        <Paper elevation={3} className={classes.paper}>
+          <Grid item xs={12}>
+            <div className={classes.demo}>
+              <List dense={dense}>
+                {generate(
+                  <ListItem>
+                    <ListItemText
+                      primary="Single-line item"
+                      secondary={secondary ? "Secondary text" : null}
+                    />
+                  </ListItem>
+                )}
+              </List>
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              item
+              xs={12}
+              className={classes.chatZone}
+              id="outlined-multiline-static"
+              label="Multiline"
+              multiline
+              rows={1}
+              defaultValue="Default Value"
+              style={{ width: 1000 }}
+            />
+          </Grid>
+        </Paper>
+      </Grid>
+    </div>
+  );
+}
+
+export default Chat;

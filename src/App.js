@@ -16,6 +16,7 @@ function App() {
       <Router>
         <NavBar />
         <Switch>
+          {/* <Route path="/" component={Home} /> */}
           <Route path="/home" component={Home} />
           <Route path="/games" component={Games} />
           <Route path="/ingame" component={inGame} />

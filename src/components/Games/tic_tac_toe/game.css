@@ -24,10 +24,10 @@ ul {
   font-size: 50px;
   font-weight: bold;
   line-height: 34px;
-  height: 100px;
+  height: 150px;
   padding: 0;
   text-align: center;
-  width: 100px;
+  width: 150px;
 }
 
 .square:focus {
