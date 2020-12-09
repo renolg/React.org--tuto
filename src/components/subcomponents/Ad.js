@@ -1,12 +1,12 @@
 import React from "react";
-import image from "./image.jpg";
+import image from "../images/ad_template.jpg";
 
-export class Ad extends React.Component {
-  render() {
-    return (
-      <div>
-        <img src={image}></img>
-      </div>
-    );
-  }
+function Ad() {
+  return (
+    <div>
+      <img src={image}></img>
+    </div>
+  );
 }
+
+export default Ad;

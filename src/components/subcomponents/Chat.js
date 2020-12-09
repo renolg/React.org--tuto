@@ -1,13 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper } from "@material-ui/core/";
+import { Grid, Paper, Typography } from "@material-ui/core/";
 import TextField from "@material-ui/core/TextField";
 import { red } from "@material-ui/core/colors";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -37,6 +37,7 @@ function Chat() {
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Paper elevation={3} className={classes.paper}>
+          <Typography variant="h6">Chat</Typography>
           <Grid item xs={12}>
             <div className={classes.demo}>
               <List dense={dense}>
@@ -53,14 +54,11 @@ function Chat() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              item
-              xs={12}
               className={classes.chatZone}
               id="outlined-multiline-static"
-              label="Multiline"
+              label="Type here"
               multiline
               rows={1}
-              defaultValue="Default Value"
               style={{ width: 1000 }}
             />
           </Grid>
