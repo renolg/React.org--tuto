@@ -36,33 +36,31 @@ function Chat() {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        <Paper elevation={3} className={classes.paper}>
-          <Typography variant="h6">Chat</Typography>
-          <Grid item xs={12}>
-            <div className={classes.demo}>
-              <List dense={dense}>
-                {generate(
-                  <ListItem>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary={secondary ? "Secondary text" : null}
-                    />
-                  </ListItem>
-                )}
-              </List>
-            </div>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              className={classes.chatZone}
-              id="outlined-multiline-static"
-              label="Type here"
-              multiline
-              rows={1}
-              style={{ width: 1000 }}
-            />
-          </Grid>
-        </Paper>
+        <Typography variant="h6">Chat</Typography>
+        <Grid item xs={12}>
+          <div className={classes.demo}>
+            <List dense={dense}>
+              {generate(
+                <ListItem>
+                  <ListItemText
+                    primary="Single-line item"
+                    secondary={secondary ? "Secondary text" : null}
+                  />
+                </ListItem>
+              )}
+            </List>
+          </div>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            className={classes.chatZone}
+            id="outlined-multiline-static"
+            label="Type here"
+            multiline
+            rows={1}
+            style={{ width: 1000 }}
+          />
+        </Grid>
       </Grid>
     </div>
   );

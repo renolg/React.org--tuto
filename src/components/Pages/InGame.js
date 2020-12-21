@@ -11,15 +11,15 @@ import { CenterFocusStrong } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
+    marginTop: 20,
   },
   blocks: {
-    
+    padding: 0,
   },
   paper: {
+    display: "flex",
     padding: 30,
+    justifyContent: "center",
   },
 }));
 
@@ -27,29 +27,21 @@ function InGame() {
   const classes = useStyles();
   return (
     <Grid container className={classes.root} spacing={2} justify="space-evenly">
-      <Grid item xs={8}>
+      <Grid item xs={8} className={classes.blocks}>
         <Paper className={classes.paper} elevation={3}>
-          <Game
-            className={classes.blocks}
-            style={{
-              justify: "center",
-              alignItems: "center",
-              alignself: "center",
-            }}
-          />
+          <Game />
         </Paper>
       </Grid>
-      <Grid item xs={3}>
-        <Ad />
+      <Grid item xs={4}>
+        <Paper className={classes.paper} elevation={3}>
+          <Ad />
+        </Paper>
       </Grid>
 
-      <Grid
-        item
-        xs={12}
-        className={classes.blocks}
-      >
-        <Chat className={classes.blocks}
-        />
+      <Grid item xs={12} className={classes.blocks}>
+        <Paper className={classes.paper} elevation={3}>
+          <Chat />
+        </Paper>
       </Grid>
     </Grid>
   );

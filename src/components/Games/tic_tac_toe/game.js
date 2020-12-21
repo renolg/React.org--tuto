@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./game.css";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
 export function Square(props) {
   return (
@@ -53,13 +58,17 @@ export default class Game extends React.Component {
       ],
       xIsNext: true,
       stepNumber: 0,
+      value: "0",
     };
+    console.log(this.state.value);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -74,6 +83,12 @@ export default class Game extends React.Component {
       xIsNext: !this.state.xIsNext,
     });
   }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+    console.log(this.state.value);
+  }
+
   jumpTo(step) {
     this.setState({
       stepNumber: step,
@@ -112,7 +127,23 @@ export default class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+
+          <ol>{this.state.value === "1" ? moves : null}</ol>
+        </div>
+        <div className="game-option">
+          <div>Options</div>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Allow time travel</FormLabel>
+            <RadioGroup
+              aria-label="gender"
+              name="gender1"
+              value={this.state.value}
+              onChange={(event) => this.handleChange(event)}
+            >
+              <FormControlLabel value="1" control={<Radio />} label="Enable" />
+              <FormControlLabel value="0" control={<Radio />} label="Disable" />
+            </RadioGroup>
+          </FormControl>
         </div>
       </div>
     );
