@@ -6,6 +6,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { Button, Grid } from "@material-ui/core";
+import { BorderAll } from "@material-ui/icons";
 
 export function Square(props) {
   return (
@@ -60,8 +62,6 @@ export default class Game extends React.Component {
       stepNumber: 0,
       value: "0",
     };
-    console.log(this.state.value);
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(i) {
@@ -86,13 +86,24 @@ export default class Game extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-    console.log(this.state.value);
   }
 
   jumpTo(step) {
     this.setState({
       stepNumber: step,
       xIsNext: step % 2 === 0,
+    });
+  }
+  handleClickRestart() {
+    this.setState({
+      history: [
+        {
+          squares: Array(9).fill(null),
+        },
+      ],
+      xIsNext: true,
+      stepNumber: 0,
+      value: "0",
     });
   }
 
@@ -110,27 +121,9 @@ export default class Game extends React.Component {
       );
     });
 
-    let status;
-    if (winner) {
-      status = "Winner: " + winner;
-    } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
-    }
-
-    return (
-      <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-
-          <ol>{this.state.value === "1" ? moves : null}</ol>
-        </div>
-        <div className="game-option">
+    const OptionSettings = () => {
+      return (
+        <div>
           <div>Options</div>
           <FormControl component="fieldset">
             <FormLabel component="legend">Allow time travel</FormLabel>
@@ -145,7 +138,40 @@ export default class Game extends React.Component {
             </RadioGroup>
           </FormControl>
         </div>
-      </div>
+      );
+    };
+
+    let status;
+    if (winner) {
+      status = "Winner: " + winner;
+    } else {
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+    }
+
+    return (
+      <Grid container spacing={1} justifyContent="space-evenly">
+        <Button
+          variant="contained"
+          style={{ maxHeight: "30px" }}
+          maxHeight="25"
+          color="primary"
+          onClick={() => this.handleClickRestart()}
+        >
+          Restart Game
+        </Button>
+        <div className="game-board">
+          <Board
+            squares={current.squares}
+            onClick={(i) => this.handleClick(i)}
+          />
+        </div>
+        <div className="game-info">
+          <div>{status}</div>
+
+          <ol>{this.state.value === "1" ? moves : null}</ol>
+        </div>
+        <div className="game-option">{OptionSettings()}</div>
+      </Grid>
     );
   }
 }

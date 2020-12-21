@@ -3,6 +3,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { CenterFocusStrong } from "@material-ui/icons";
+import tic_tac_toe from "../images/tic_tac_toe.png";
+import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
     fontSize: 30,
     display: "flex",
-    background: "blue",
+    backgroundColor: "lightgray",
+    backgroundSize: "100% 100%",
     flexDirection: "column",
     justifyContent: "center",
     color: "white",
@@ -35,8 +38,13 @@ function Games() {
     >
       <Grid item xs={12}>
         <Grid container justify="center" spacing={2}>
-          <Paper className={classes.paper} component={Link} to="/ingame">
-            Tic-tac-toe
+          <Paper
+            className={classes.paper}
+            component={Link}
+            to="/ingame"
+            style={{ backgroundImage: `url(${tic_tac_toe})` }}
+          >
+            Tic-Tac-Toe
           </Paper>
           <Paper className={classes.paper} component={Link} to="/home">
             Chess
