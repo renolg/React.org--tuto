@@ -9,46 +9,6 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { Button, Grid } from "@material-ui/core";
 import { BorderAll } from "@material-ui/icons";
 
-export function Square(props) {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
-
-export class Board extends React.Component {
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
-
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -107,6 +67,40 @@ export default class Game extends React.Component {
     });
   }
 
+  RestartGame = () => {
+    return (
+      <Button
+        variant="contained"
+        style={{ maxHeight: "30px" }}
+        maxHeight="25"
+        color="primary"
+        onClick={() => this.handleClickRestart()}
+      >
+        Restart Game
+      </Button>
+    );
+  };
+
+  OptionSettings = () => {
+    return (
+      <div>
+        <div>Options</div>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Allow time travel</FormLabel>
+          <RadioGroup
+            aria-label="gender"
+            name="gender1"
+            value={this.state.value}
+            onChange={(event) => this.handleChange(event)}
+          >
+            <FormControlLabel value="1" control={<Radio />} label="Enable" />
+            <FormControlLabel value="0" control={<Radio />} label="Disable" />
+          </RadioGroup>
+        </FormControl>
+      </div>
+    );
+  };
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -121,26 +115,6 @@ export default class Game extends React.Component {
       );
     });
 
-    const OptionSettings = () => {
-      return (
-        <div>
-          <div>Options</div>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Allow time travel</FormLabel>
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              value={this.state.value}
-              onChange={(event) => this.handleChange(event)}
-            >
-              <FormControlLabel value="1" control={<Radio />} label="Enable" />
-              <FormControlLabel value="0" control={<Radio />} label="Disable" />
-            </RadioGroup>
-          </FormControl>
-        </div>
-      );
-    };
-
     let status;
     if (winner) {
       status = "Winner: " + winner;
@@ -150,27 +124,18 @@ export default class Game extends React.Component {
 
     return (
       <Grid container spacing={1} justifyContent="space-evenly">
-        <Button
-          variant="contained"
-          style={{ maxHeight: "30px" }}
-          maxHeight="25"
-          color="primary"
-          onClick={() => this.handleClickRestart()}
-        >
-          Restart Game
-        </Button>
+        {this.RestartGame()}
         <div className="game-board">
+          <div>{status}</div>
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
-
           <ol>{this.state.value === "1" ? moves : null}</ol>
         </div>
-        <div className="game-option">{OptionSettings()}</div>
+        <div className="game-option">{this.OptionSettings()}</div>
       </Grid>
     );
   }
@@ -194,4 +159,44 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+export function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
+
+export class Board extends React.Component {
+  renderSquare(i) {
+    return (
+      <Square
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
+  }
+  render() {
+    return (
+      <div>
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(6)}
+          {this.renderSquare(7)}
+          {this.renderSquare(8)}
+        </div>
+      </div>
+    );
+  }
 }
